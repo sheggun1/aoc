@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+/* ============================================================
+   SHARED TOKENS
+   ============================================================ */
 :root{
   --navy:#07224f;--blue:#0B3D91;--cyan:#00B4D8;--cyan-soft:#e3f8fd;--sky:#eef4fc;
   --paper:#f6f9fd;--ink:#0d1b2a;--ink2:#3d4e63;--muted:#6b7d92;--line:#dfe8f2;
@@ -18,14 +21,17 @@
   --sh:0 18px 40px -18px rgba(7,34,79,.28);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{font-family:var(--body);color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
-.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.hidden{display:none!important}
 
+/* ============================================================
+   PUBLIC SITE STYLES
+   ============================================================ */
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:10px;font-weight:700;font-size:15px;border:0;transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
 .btn:hover{transform:translateY(-2px)}
 .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
@@ -38,10 +44,11 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .btn-blue:hover{background:var(--navy)}
 .btn-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
 .btn-line:hover{background:rgba(255,255,255,.1)}
+.btn-line-dark{background:#fff;color:var(--ink2);border:1.5px solid var(--line)}
+.btn-line-dark:hover{border-color:var(--blue);color:var(--blue);transform:none}
 .link{color:var(--blue);font-weight:700;font-size:14px}
 .link:hover{text-decoration:underline}
 
-/* Nav */
 .nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .25s,box-shadow .25s}
 .nav.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
@@ -58,7 +65,6 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .burger i{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
 .nav.scrolled .burger i{background:var(--ink)}
 
-/* Hero */
 .hero{background:var(--navy);color:#fff;padding:150px 0 110px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 70% at 85% 10%,rgba(0,180,216,.28),transparent 70%),radial-gradient(50% 60% at 0% 100%,rgba(11,61,145,.9),transparent 70%)}
 .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 80%)}
@@ -72,8 +78,6 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .facts{display:flex;gap:28px;flex-wrap:wrap;font-size:14.5px;color:rgba(255,255,255,.82);font-weight:500}
 .facts span{display:flex;align-items:center;gap:8px}
 .facts svg{color:var(--cyan)}
-
-/* Job ticket */
 .ticket{background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:rotate(1.6deg);position:relative;max-width:410px;margin-left:auto}
 .t-top{padding:22px 24px 18px;display:flex;justify-content:space-between;align-items:center}
 .t-top b{font:800 15px var(--head)}
@@ -87,7 +91,6 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .tag.ok{background:#e4f6ec;color:var(--ok)}.tag.pend{background:#fdf0dc;color:var(--pend)}
 .t-foot{background:var(--sky);padding:12px 24px;border-radius:0 0 18px 18px;font-size:12.5px;color:var(--muted);font-weight:600;text-align:center}
 
-/* Sections */
 .sec{padding:96px 0}
 .alt{background:var(--paper)}
 .head{max-width:640px;margin-bottom:48px}
@@ -95,7 +98,6 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .head h2{font-size:clamp(30px,4vw,44px);font-weight:800;color:var(--navy);margin-bottom:12px}
 .head p{font-size:17px;color:var(--ink2)}
 
-/* Services */
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .svc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s,transform .2s}
 .svc:hover{border-color:var(--cyan);box-shadow:var(--sh);transform:translateY(-3px)}
@@ -104,13 +106,12 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .svc p{font-size:14.5px;color:var(--ink2);flex:1;margin-bottom:18px}
 .svc-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--sky);padding-top:14px}
 .svc-price{font:800 16px var(--head);color:var(--blue)}
-.svc-go{font-size:13.5px;font-weight:700;color:var(--blue)}
+.svc-go{font-size:13.5px;font-weight:700;color:var(--blue);cursor:pointer}
 .svc-go:hover{text-decoration:underline}
 .skel{height:230px;border-radius:16px;background:linear-gradient(90deg,#eef3f9,#f8fbfe,#eef3f9);background-size:200% 100%;animation:sh 1.4s infinite}
 @keyframes sh{to{background-position:-200% 0}}
 .empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);background:#fff;border:1.5px dashed var(--line);border-radius:16px}
 
-/* Prices */
 .ptable{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh);overflow-x:auto}
 table{width:100%;border-collapse:collapse;min-width:480px}
 th{text-align:left;padding:15px 24px;font-size:13px;font-weight:700;color:var(--muted);background:var(--sky)}
@@ -121,9 +122,7 @@ tbody tr:hover td{background:#fafdff}
 .unit{display:block;font:500 12px var(--body);color:var(--muted)}
 .cat{font-size:12px;font-weight:600;color:var(--ink2);background:var(--sky);padding:4px 11px;border-radius:99px}
 .loading{text-align:center;color:var(--muted);padding:40px!important}
-.note{text-align:center;color:var(--muted);font-size:14px;margin-top:18px}
 
-/* Gallery */
 .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .gi{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line)}
 .gi .im{overflow:hidden;aspect-ratio:4/3;background:var(--sky)}
@@ -133,7 +132,6 @@ tbody tr:hover td{background:#fafdff}
 .gi strong{display:block;font-size:15.5px;color:var(--navy)}
 .gi span{font-size:13.5px;color:var(--muted)}
 
-/* Steps */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
 .step{padding:0 28px 0 0;position:relative}
 .step .n{width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:800 18px var(--head);margin-bottom:20px;position:relative;z-index:1}
@@ -141,7 +139,6 @@ tbody tr:hover td{background:#fafdff}
 .step h3{font-size:20px;color:var(--navy);margin-bottom:8px}
 .step p{font-size:15px;color:var(--ink2);max-width:300px}
 
-/* Request */
 .two{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
 .copy h2{font-size:clamp(30px,4vw,42px);font-weight:800;color:var(--navy);margin-bottom:14px}
 .copy>p{font-size:17px;color:var(--ink2);margin-bottom:28px}
@@ -151,7 +148,7 @@ tbody tr:hover td{background:#fafdff}
 .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--sh)}
 .field{margin-bottom:18px}
 label{display:block;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:7px}
-input[type=text],input[type=tel],textarea,select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font:500 15.5px var(--body);color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+input[type=text],input[type=tel],input[type=password],input[type=number],textarea,select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font:500 15.5px var(--body);color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
 input:focus,textarea:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,61,145,.1)}
 textarea{resize:vertical;min-height:100px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -166,24 +163,22 @@ textarea{resize:vertical;min-height:100px}
 .msg{margin-top:14px;font-size:14.5px;font-weight:600;text-align:center}
 .msg.ok{color:var(--ok)}.msg.err{color:var(--err)}
 
-/* Status */
-.stat{background:var(--navy);color:#fff}
-.stat .copy h2{color:#fff}.stat .copy>p{color:rgba(255,255,255,.78);margin:0}
-.stat .card{border:0}
+.stat-sec{background:var(--navy);color:#fff}
+.stat-sec .copy h2{color:#fff}.stat-sec .copy>p{color:rgba(255,255,255,.78);margin:0}
+.stat-sec .card{border:0}
 .s-in{display:flex;gap:10px;margin-bottom:18px}
-.s-in input{flex:1;min-width:0;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;font:500 15.5px var(--body)}
-.s-in input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,61,145,.1)}
+.s-in input{flex:1;min-width:0}
 .s-msg{text-align:center;padding:22px;color:var(--muted);font-size:14.5px}
 .s-item{padding:16px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
 .s-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .s-top strong{font:800 15px var(--head);color:var(--navy)}
 .s-meta{font-size:13.5px;color:var(--muted);margin-bottom:6px}
 .s-note{font-size:13.5px;color:var(--ink2);padding:9px 12px;background:var(--paper);border-radius:8px;margin-bottom:8px}
-.badge{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px}
+.badge{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px;display:inline-block;white-space:nowrap}
 .badge.ok{background:#e4f6ec;color:var(--ok)}.badge.pend{background:#fdf0dc;color:var(--pend)}
 .badge.prog{background:var(--sky);color:var(--blue)}.badge.done{background:#eceff3;color:var(--muted)}
+.badge.off{background:#fef0ee;color:var(--err)}
 
-/* Contact */
 .c3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .cc{border:1px solid var(--line);border-radius:16px;padding:28px;background:#fff}
 .ci{width:48px;height:48px;border-radius:12px;background:var(--cyan-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
@@ -191,7 +186,6 @@ textarea{resize:vertical;min-height:100px}
 .cc p{font-size:15px;color:var(--ink2);margin-bottom:12px;white-space:pre-line}
 .cc .muted{font-size:13.5px;color:var(--muted);font-weight:600}
 
-/* Footer */
 .foot{background:var(--navy);color:#fff;padding:56px 0 24px}
 .f-in{display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.12)}
 .f-brand{display:flex;gap:14px;max-width:380px}
@@ -200,16 +194,123 @@ textarea{resize:vertical;min-height:100px}
 .f-links{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
 .f-links a{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.75)}.f-links a:hover{color:#fff}
 .f-bot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:22px;font-size:13px;color:rgba(255,255,255,.5)}
-.f-bot a{font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.18);border-radius:6px}.f-bot a:hover{color:#fff}
+.f-bot a{font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.18);border-radius:6px;cursor:pointer}.f-bot a:hover{color:#fff}
 
 .wa{position:fixed;right:22px;bottom:22px;z-index:90;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 20px 14px 16px;border-radius:99px;font-weight:700;font-size:15px;box-shadow:0 14px 30px -10px rgba(37,211,102,.75);transition:transform .2s}
 .wa:hover{transform:translateY(-3px)}
 
+/* ============================================================
+   LOGIN MODAL
+   ============================================================ */
+.login-backdrop{position:fixed;inset:0;background:rgba(7,34,79,.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;z-index:3000}
+.login-backdrop.show{display:flex}
+.login-card{background:#fff;border-radius:20px;padding:40px 36px;width:100%;max-width:420px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.login-brand b{display:block;font:800 16px var(--head);color:var(--navy)}
+.login-brand small{font-size:11.5px;color:var(--muted)}
+.login-card h2{font-size:26px;font-weight:800;color:var(--navy);margin-bottom:6px;font-family:var(--head)}
+.login-card p{font-size:14.5px;color:var(--ink2);margin-bottom:24px}
+
+/* ============================================================
+   ADMIN DASHBOARD STYLES
+   ============================================================ */
+.admin-app{position:fixed;inset:0;background:var(--paper);z-index:2000;display:grid;grid-template-columns:250px 1fr;overflow:hidden}
+.admin-app.hidden{display:none}
+.a-side{background:var(--navy);color:#fff;padding:24px 0;display:flex;flex-direction:column;height:100vh;overflow-y:auto}
+.a-side-brand{display:flex;align-items:center;gap:10px;padding:0 24px 24px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:16px}
+.a-side-brand b{display:block;font:800 15px var(--head)}
+.a-side-brand small{font-size:11px;color:rgba(255,255,255,.6)}
+.a-nav{display:flex;flex-direction:column;gap:2px;padding:0 12px;flex:1}
+.a-nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,.75);transition:all .15s;cursor:pointer}
+.a-nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.a-nav a.active{background:var(--cyan);color:var(--navy)}
+.a-side-foot{padding:16px 12px 0;border-top:1px solid rgba(255,255,255,.1);margin-top:16px}
+.a-user{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.06);margin-bottom:10px}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font:800 13px var(--head);flex:none}
+.a-user div{min-width:0}
+.a-user b{display:block;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.a-user small{font-size:11px;color:rgba(255,255,255,.6);text-transform:capitalize}
+.a-logout{width:100%;justify-content:flex-start;background:transparent;color:rgba(255,255,255,.65);border:0;padding:10px 14px;font-size:13.5px;font-weight:600;border-radius:10px;text-align:left}
+.a-logout:hover{background:rgba(255,255,255,.08);color:#fff}
+
+.a-main{padding:32px 40px 60px;overflow-y:auto;max-width:1400px}
+.a-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:20px;flex-wrap:wrap}
+.a-top h1{font-size:clamp(22px,3vw,30px);font-weight:800;color:var(--navy);font-family:var(--head)}
+.a-top p{font-size:14.5px;color:var(--muted);margin-top:4px}
+.menu-toggle{display:none;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:32px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cyan)}
+.stat-card.pend::before{background:var(--pend)}
+.stat-card.ready::before{background:var(--ok)}
+.stat-card.done::before{background:var(--muted)}
+.stat-card span{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px}
+.stat-card strong{display:block;font:800 32px var(--head);color:var(--navy);line-height:1}
+.stat-card small{font-size:12px;color:var(--muted);margin-top:6px;display:block}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:24px}
+.panel-head{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.panel-head h2{font-size:18px;font-weight:800;color:var(--navy);font-family:var(--head)}
+.panel-head p{font-size:13px;color:var(--muted);margin-top:2px}
+.panel-body{padding:24px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{padding:8px 14px;border-radius:99px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;color:var(--ink2);transition:all .15s}
+.filters button:hover{border-color:var(--blue);color:var(--blue)}
+.filters button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;min-width:800px}
+.tbl th{text-align:left;padding:13px 16px;font-size:12px;font-weight:700;color:var(--muted);background:var(--paper);text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;border:0}
+.tbl td{padding:14px 16px;border-top:1px solid var(--line);font-size:14px;vertical-align:middle}
+.tbl tbody tr:hover td{background:#fafdff}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1.5px solid var(--line);background:#fff;color:var(--ink2);transition:all .15s;cursor:pointer}
+.icon-btn:hover{border-color:var(--blue);color:var(--blue)}
+.empty-row{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+.a-loading{padding:40px;text-align:center;color:var(--muted)}
+.spinner{width:32px;height:32px;border:3px solid var(--sky);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fgrid .full{grid-column:1/-1}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)}
+
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.gal-item{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;position:relative}
+.gal-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.gal-item .meta{padding:12px 14px}
+.gal-item .meta strong{display:block;font-size:14px;color:var(--navy);margin-bottom:2px}
+.gal-item .meta span{font-size:12px;color:var(--muted)}
+.gal-item .del{position:absolute;top:8px;right:8px;background:#fff;border:0;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;color:var(--err);box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;transition:opacity .15s;cursor:pointer}
+.gal-item:hover .del{opacity:1}
+
+.modal-backdrop{position:fixed;inset:0;background:rgba(7,34,79,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:4000}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.modal h3{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:6px;font-family:var(--head)}
+.modal p.sub{font-size:14px;color:var(--muted);margin-bottom:20px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:#fff;padding:14px 20px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 20px 40px -12px rgba(0,0,0,.4);transform:translateY(200%);transition:transform .3s;z-index:5000}
+.toast.show{transform:translateY(0)}
+.toast.ok{background:var(--ok)}
+.toast.err{background:var(--err)}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media(max-width:960px){
   .hero-in,.two{grid-template-columns:1fr;gap:44px}
   .ticket{margin:0 auto}
   .svc-grid,.gal,.c3{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr;gap:30px}.step::before{display:none}
+  .admin-app{grid-template-columns:1fr}
+  .a-side{position:fixed;left:0;top:0;bottom:0;width:250px;transform:translateX(-100%);transition:transform .25s;z-index:2100}
+  .a-side.open{transform:translateX(0)}
+  .menu-toggle{display:block}
+  .a-main{padding:20px}
+  .fgrid{grid-template-columns:1fr}
 }
 @media(max-width:700px){
   .wrap{padding:0 20px}.sec{padding:64px 0}.hero{padding:116px 0 70px}
@@ -227,6 +328,11 @@ textarea{resize:vertical;min-height:100px}
 </style>
 </head>
 <body>
+
+<!-- ============================================================
+     PUBLIC SITE
+     ============================================================ -->
+<div id="publicSite">
 
 <header class="nav" id="nav">
   <div class="wrap nav-in">
@@ -358,7 +464,7 @@ textarea{resize:vertical;min-height:100px}
   </div>
 </section>
 
-<section class="sec stat" id="status">
+<section class="sec stat-sec" id="status">
   <div class="wrap two">
     <div class="copy">
       <h2>Is your request ready?</h2>
@@ -406,7 +512,7 @@ textarea{resize:vertical;min-height:100px}
   </div>
   <div class="wrap f-bot">
     <span>© <span id="year"></span> AOC Dynamic Concept. All rights reserved.</span>
-    <a href="?page=Admin">Admin</a>
+    <a id="adminOpenBtn">Admin</a>
   </div>
 </footer>
 
@@ -415,7 +521,225 @@ textarea{resize:vertical;min-height:100px}
   <span>Chat with us</span>
 </a>
 
+</div><!-- /publicSite -->
+
+
+<!-- ============================================================
+     LOGIN MODAL
+     ============================================================ -->
+<div class="login-backdrop" id="loginBackdrop">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="mark">AOC</div>
+      <div><b>AOC Dynamic Concept</b><small>Admin Dashboard</small></div>
+    </div>
+    <h2>Welcome back</h2>
+    <p>Sign in to manage requests, services and gallery.</p>
+    <form id="loginForm">
+      <div class="field"><label for="loginUser">Username</label><input type="text" id="loginUser" required autocomplete="username" placeholder="owner"></div>
+      <div class="field"><label for="loginPass">Password</label><input type="password" id="loginPass" required autocomplete="current-password" placeholder="••••••••"></div>
+      <button type="submit" class="btn btn-blue btn-lg btn-block" id="loginBtn">Sign in</button>
+      <div class="msg" id="loginMsg"></div>
+      <button type="button" class="btn btn-line-dark btn-block" style="margin-top:12px" id="cancelLoginBtn">Cancel</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     ADMIN DASHBOARD
+     ============================================================ -->
+<div id="adminApp" class="admin-app hidden">
+  <aside class="a-side" id="aSide">
+    <div class="a-side-brand"><div class="mark">AOC</div><div><b>Dynamic Concept</b><small>Admin panel</small></div></div>
+    <nav class="a-nav">
+      <a data-tab="requests" class="active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        Requests
+      </a>
+      <a data-tab="services">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Services
+      </a>
+      <a data-tab="gallery">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Gallery
+      </a>
+      <a data-tab="admins" id="tabAdmins">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Admins
+      </a>
+    </nav>
+    <div class="a-side-foot">
+      <div class="a-user">
+        <div class="avatar" id="sideAvatar">O</div>
+        <div><b id="sideName">Owner</b><small id="sideRole">owner</small></div>
+      </div>
+      <button class="a-logout" id="logoutBtn">↩ Sign out</button>
+    </div>
+  </aside>
+
+  <main class="a-main">
+    <div class="a-top">
+      <div style="display:flex;gap:14px;align-items:center">
+        <button class="menu-toggle" id="aMenuToggle">☰</button>
+        <div><h1 id="pageTitle">Requests</h1><p id="pageSub">Manage all incoming student requests.</p></div>
+      </div>
+      <button class="btn btn-cyan btn-sm" id="refreshBtn">↻ Refresh</button>
+    </div>
+
+    <div class="stats" id="statsRow">
+      <div class="stat-card"><span>Total</span><strong id="statTotal">—</strong><small>all requests</small></div>
+      <div class="stat-card pend"><span>Pending</span><strong id="statPend">—</strong><small>need action</small></div>
+      <div class="stat-card"><span>In progress</span><strong id="statProg">—</strong><small>being worked</small></div>
+      <div class="stat-card ready"><span>Ready</span><strong id="statReady">—</strong><small>for pickup</small></div>
+      <div class="stat-card done"><span>Collected</span><strong id="statDone">—</strong><small>completed</small></div>
+      <div class="stat-card"><span>Today</span><strong id="statToday">—</strong><small>new requests</small></div>
+    </div>
+
+    <div class="panel" id="panelRequests">
+      <div class="panel-head">
+        <div><h2>All requests</h2><p>Click a row action to update status or add notes.</p></div>
+        <div class="filters" id="statusFilters">
+          <button data-status="All" class="active">All</button>
+          <button data-status="Pending">Pending</button>
+          <button data-status="In Progress">In progress</button>
+          <button data-status="Ready">Ready</button>
+          <button data-status="Collected">Collected</button>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>ID</th><th>Date</th><th>Student</th><th>Phone</th><th>Service</th><th>Status</th><th>Paid</th><th>Actions</th></tr></thead>
+          <tbody id="reqBody"><tr><td colspan="8" class="a-loading"><div class="spinner"></div>Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel hidden" id="panelServices">
+      <div class="panel-head">
+        <div><h2>Services</h2><p>Edit services shown on the public site.</p></div>
+        <button class="btn btn-blue btn-sm" onclick="openServiceModal()">+ Add service</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>ID</th><th>Name</th><th>Category</th><th>Price</th><th>Active</th><th>Actions</th></tr></thead>
+          <tbody id="svcBody"><tr><td colspan="6" class="a-loading"><div class="spinner"></div>Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel hidden" id="panelGallery">
+      <div class="panel-head">
+        <div><h2>Gallery</h2><p>Upload images of projects and shop to show on the public site.</p></div>
+        <button class="btn btn-blue btn-sm" onclick="openGalleryModal()">+ Upload image</button>
+      </div>
+      <div class="panel-body">
+        <div class="gal-grid" id="galGrid"><div class="a-loading" style="grid-column:1/-1"><div class="spinner"></div>Loading…</div></div>
+      </div>
+    </div>
+
+    <div class="panel hidden" id="panelAdmins">
+      <div class="panel-head">
+        <div><h2>Admins</h2><p>Only owners can add or change admins.</p></div>
+        <button class="btn btn-blue btn-sm" onclick="openAdminModal()">+ Add admin</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="tbl">
+          <thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Role</th><th>Active</th><th>Last login</th><th>Actions</th></tr></thead>
+          <tbody id="admBody"><tr><td colspan="7" class="a-loading"><div class="spinner"></div>Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<!-- ============ ADMIN MODALS ============ -->
+<div class="modal-backdrop" id="reqModal">
+  <div class="modal">
+    <h3 id="reqModalTitle">Update request</h3>
+    <p class="sub" id="reqModalSub"></p>
+    <div class="field"><label>Status</label>
+      <select id="modalStatus"><option>Pending</option><option>In Progress</option><option>Ready</option><option>Collected</option></select>
+    </div>
+    <div class="field"><label>Admin notes (visible to student)</label>
+      <textarea id="modalNotes" rows="3" placeholder="e.g. Ready for pickup — bring your ID card"></textarea>
+    </div>
+    <div class="field"><label>Amount paid (₦)</label>
+      <input type="number" id="modalPaid" min="0" step="50" placeholder="0">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-line-dark" onclick="closeModal('reqModal')">Cancel</button>
+      <button class="btn btn-blue" id="reqSaveBtn" onclick="saveRequestUpdate()">Save changes</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="svcModal">
+  <div class="modal">
+    <h3 id="svcModalTitle">Add service</h3>
+    <p class="sub">Edit how this service appears on your public site.</p>
+    <div class="fgrid">
+      <div class="field full"><label>Service name *</label><input type="text" id="svcName" placeholder="e.g. Project Work"></div>
+      <div class="field"><label>Category</label><select id="svcCategory"><option>Walk-in</option><option>Request</option></select></div>
+      <div class="field"><label>Price display</label><input type="text" id="svcPrice" placeholder="e.g. From ₦25,000"></div>
+      <div class="field full"><label>Description</label><textarea id="svcDesc" rows="3"></textarea></div>
+      <div class="field"><label>Active</label><select id="svcActive"><option>Yes</option><option>No</option></select></div>
+      <div class="field"><label>Display order</label><input type="number" id="svcOrder" min="1" placeholder="1"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-line-dark" onclick="closeModal('svcModal')">Cancel</button>
+      <button class="btn btn-blue" id="svcSaveBtn" onclick="saveService()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="galModal">
+  <div class="modal">
+    <h3>Upload to gallery</h3>
+    <p class="sub">Upload an image and give it a title.</p>
+    <div class="field"><label>Title *</label><input type="text" id="galTitle"></div>
+    <div class="field"><label>Description</label><input type="text" id="galDesc"></div>
+    <div class="field"><label>Image file *</label><input type="file" id="galFile" accept="image/*"></div>
+    <div class="modal-actions">
+      <button class="btn btn-line-dark" onclick="closeModal('galModal')">Cancel</button>
+      <button class="btn btn-blue" id="galSaveBtn" onclick="saveGallery()">Upload</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="admModal">
+  <div class="modal">
+    <h3 id="admModalTitle">Add admin</h3>
+    <p class="sub" id="admModalSub">Create a new admin account.</p>
+    <div class="fgrid">
+      <div class="field full"><label>Name *</label><input type="text" id="admName"></div>
+      <div class="field"><label>Username *</label><input type="text" id="admUsername" autocomplete="off"></div>
+      <div class="field"><label>Password *</label><input type="text" id="admPassword" autocomplete="new-password"></div>
+      <div class="field"><label>Role *</label>
+        <select id="admRole"><option value="staff">Staff — requests only</option><option value="manager">Manager — requests + services</option><option value="owner">Owner — full access</option></select>
+      </div>
+      <div class="field"><label>Active</label><select id="admActive"><option>Yes</option><option>No</option></select></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-line-dark" onclick="closeModal('admModal')">Cancel</button>
+      <button class="btn btn-blue" id="admSaveBtn" onclick="saveAdmin()">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script src="assets/config.js"></script>
 <script>
+/* ============================================================
+   STATE
+   ============================================================ */
 let SERVICES = [];
 const SITE = {
   phone: '2348000000000',
@@ -423,18 +747,29 @@ const SITE = {
   address: 'AOC Dynamic Concept, Nigeria',
   hours: 'Mon – Sat: 8:00am – 6:00pm'
 };
+const A = {
+  token: sessionStorage.getItem('aoc_token') || '',
+  name:  sessionStorage.getItem('aoc_name')  || '',
+  role:  sessionStorage.getItem('aoc_role')  || '',
+  tab: 'requests',
+  requests: [], services: [], gallery: [], admins: [],
+  filterStatus: 'All',
+  editingRequest: null, editingService: null, editingAdmin: null
+};
 const $ = id => document.getElementById(id);
+
+/* ============================================================
+   PUBLIC SITE
+   ============================================================ */
 $('year').textContent = new Date().getFullYear();
 
-// Nav
 const nav = $('nav'), navLinks = $('navLinks');
 $('navToggle').addEventListener('click', () => { navLinks.classList.toggle('open'); nav.classList.add('scrolled'); });
 document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20 || navLinks.classList.contains('open'));
 window.addEventListener('scroll', onScroll); onScroll();
 
-// Services
-google.script.run.withSuccessHandler(onServices).withFailureHandler(onErr).getServices();
+api('getServices').then(r => onServices(r.services || [])).catch(onErr);
 function onServices(list) {
   SERVICES = list || [];
   const grid = $('servicesGrid'), sel = $('serviceSelect');
@@ -446,16 +781,15 @@ function onServices(list) {
       <p>${esc(s.Description || '')}</p>
       <div class="svc-foot">
         <span class="svc-price">${esc(s.Price || 'Ask for price')}</span>
-        <a href="#request" class="svc-go" data-svc="${esc(s.ServiceName)}">Request this</a>
+        <a class="svc-go" data-svc="${esc(s.ServiceName)}">Request this</a>
       </div>
     </div>`).join('');
   sel.innerHTML = '<option value="">Select a service…</option>' +
     SERVICES.map(s => `<option value="${esc(s.ServiceName)}">${esc(s.ServiceName)}${s.Price ? ' — ' + esc(s.Price) : ''}</option>`).join('');
-  grid.querySelectorAll('.svc-go').forEach(a => a.addEventListener('click', () => { sel.value = a.dataset.svc; }));
+  grid.querySelectorAll('.svc-go').forEach(a => a.addEventListener('click', () => { sel.value = a.dataset.svc; location.hash = '#request'; }));
 }
 
-// Prices
-google.script.run.withSuccessHandler(onPrices).withFailureHandler(onErr).getPriceList();
+api('getPriceList').then(r => onPrices(r.prices || [])).catch(onErr);
 function onPrices(list) {
   const tb = document.querySelector('#priceTable tbody');
   if (!list || !list.length) { tb.innerHTML = '<tr><td colspan="3" class="loading">Prices will be published here soon.</td></tr>'; return; }
@@ -467,8 +801,7 @@ function onPrices(list) {
     </tr>`).join('');
 }
 
-// Gallery
-google.script.run.withSuccessHandler(onGallery).withFailureHandler(onErr).getGallery();
+api('getGallery').then(r => onGallery(r.gallery || [])).catch(onErr);
 function onGallery(list) {
   const grid = $('galleryGrid');
   if (!list || !list.length) { grid.innerHTML = '<div class="empty">Photos of our work are coming soon. Visit the shop to see samples.</div>'; return; }
@@ -479,11 +812,10 @@ function onGallery(list) {
     </div>`).join('');
 }
 
-// Returning student
 function lookupStudent(phone) {
   const hint = $('returningHint');
   if (!phone || phone.length < 6) { hint.textContent = ''; hint.classList.remove('show'); return; }
-  google.script.run.withSuccessHandler(res => {
+  api('lookupStudent', { phone }).then(res => {
     if (res && res.ok) {
       const form = $('requestForm');
       if (!form.studentName.value) form.studentName.value = res.student.StudentName;
@@ -491,10 +823,9 @@ function lookupStudent(phone) {
       hint.textContent = `Welcome back, ${res.student.StudentName}! You have ${res.student.TotalRequests} previous request(s).`;
       hint.classList.add('show');
     } else { hint.textContent = ''; hint.classList.remove('show'); }
-  }).lookupStudent(phone);
+  }).catch(() => {});
 }
 
-// File input
 let FILE_DATA = null;
 $('fileInput').addEventListener('change', function (e) {
   const file = e.target.files[0], prev = $('filePreview');
@@ -512,7 +843,6 @@ $('fileInput').addEventListener('change', function (e) {
   reader.readAsDataURL(file);
 });
 
-// Submit
 $('requestForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const form = e.target, btn = $('submitBtn'), msg = $('formMsg');
@@ -529,36 +859,32 @@ $('requestForm').addEventListener('submit', function (e) {
     details:     form.details.value.trim(),
     file:        FILE_DATA
   };
-  google.script.run
-    .withSuccessHandler(res => {
-      btn.disabled = false; btn.textContent = 'Send request';
-      if (res.ok) {
-        msg.innerHTML = `✅ Request sent. Your ID is <strong>${esc(res.requestId)}</strong>. We will contact you shortly.`;
-        msg.className = 'msg ok';
-        form.reset(); FILE_DATA = null;
-        $('filePreview').innerHTML = '';
-        $('returningHint').textContent = ''; $('returningHint').classList.remove('show');
-      } else {
-        msg.textContent = res.message || 'Your request did not go through. Please try again.';
-        msg.className = 'msg err';
-      }
-    })
-    .withFailureHandler(() => {
-      btn.disabled = false; btn.textContent = 'Send request';
-      msg.textContent = 'No connection. Check your network and send again.';
+  api('submitRequest', payload).then(res => {
+    btn.disabled = false; btn.textContent = 'Send request';
+    if (res.ok) {
+      msg.innerHTML = `✅ Request sent. Your ID is <strong>${esc(res.requestId)}</strong>. We will contact you shortly.`;
+      msg.className = 'msg ok';
+      form.reset(); FILE_DATA = null;
+      $('filePreview').innerHTML = '';
+      $('returningHint').textContent = ''; $('returningHint').classList.remove('show');
+    } else {
+      msg.textContent = res.message || 'Your request did not go through. Please try again.';
       msg.className = 'msg err';
-    })
-    .submitRequest(payload);
+    }
+  }).catch(() => {
+    btn.disabled = false; btn.textContent = 'Send request';
+    msg.textContent = 'No connection. Check your network and send again.';
+    msg.className = 'msg err';
+  });
 });
 
-// Status
 $('statusBtn').addEventListener('click', checkStatus);
 $('statusInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkStatus(); });
 function checkStatus() {
   const val = $('statusInput').value.trim(), out = $('statusResult');
   if (!val) { out.innerHTML = '<div class="s-msg">Enter your phone number or student ID above.</div>'; return; }
   out.innerHTML = '<div class="s-msg">Checking…</div>';
-  google.script.run.withSuccessHandler(res => {
+  api('checkRequestStatus', { query: val }).then(res => {
     if (!res.ok) { out.innerHTML = `<div class="s-msg">${esc(res.message)}</div>`; return; }
     out.innerHTML = res.requests.map(r => `
       <div class="s-item">
@@ -567,11 +893,9 @@ function checkStatus() {
         ${r.AdminNotes ? `<div class="s-note">${esc(r.AdminNotes)}</div>` : ''}
         ${r.CompletedFileURL ? `<a href="${esc(r.CompletedFileURL)}" target="_blank" rel="noopener" class="link">Download completed file</a>` : ''}
       </div>`).join('');
-  }).withFailureHandler(() => { out.innerHTML = '<div class="s-msg">No connection. Please try again.</div>'; })
-    .checkRequestStatus(val);
+  }).catch(() => { out.innerHTML = '<div class="s-msg">No connection. Please try again.</div>'; });
 }
 
-// Site config
 (function () {
   const wa = `https://wa.me/${SITE.phone}?text=${encodeURIComponent('Hello AOC Dynamic Concept, I want to make an enquiry.')}`;
   ['waFloat', 'waHero', 'waLink'].forEach(id => $(id).href = wa);
@@ -581,9 +905,398 @@ function checkStatus() {
   $('contactHours').textContent = SITE.hours;
 })();
 
-// Helpers
+/* ============================================================
+   ADMIN — login / logout / show/hide
+   ============================================================ */
+$('adminOpenBtn').addEventListener('click', () => {
+  $('loginBackdrop').classList.add('show');
+  $('loginUser').focus();
+});
+$('cancelLoginBtn').addEventListener('click', () => $('loginBackdrop').classList.remove('show'));
+
+$('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const u = $('loginUser').value.trim(), p = $('loginPass').value;
+  if (!u || !p) return;
+  const btn = $('loginBtn'), msg = $('loginMsg');
+  btn.disabled = true; btn.textContent = 'Signing in…'; msg.className = 'msg'; msg.textContent = '';
+  api('adminLogin', { username: u, password: p }).then(res => {
+    btn.disabled = false; btn.textContent = 'Sign in';
+    if (res.ok) {
+      A.token = res.token; A.name = res.name; A.role = res.role;
+      sessionStorage.setItem('aoc_token', res.token);
+      sessionStorage.setItem('aoc_name', res.name);
+      sessionStorage.setItem('aoc_role', res.role);
+      $('loginBackdrop').classList.remove('show');
+      $('loginPass').value = '';
+      enterAdmin();
+    } else {
+      msg.textContent = res.message || 'Login failed.';
+      msg.className = 'msg err show';
+    }
+  }).catch(() => {
+    btn.disabled = false; btn.textContent = 'Sign in';
+    msg.textContent = 'Network error — try again.';
+    msg.className = 'msg err show';
+  });
+});
+
+$('logoutBtn').addEventListener('click', function () {
+  sessionStorage.clear();
+  A.token = A.name = A.role = '';
+  $('adminApp').classList.add('hidden');
+  $('publicSite').classList.remove('hidden');
+  document.body.style.overflow = '';
+});
+
+function enterAdmin() {
+  $('publicSite').classList.add('hidden');
+  $('adminApp').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  $('sideName').textContent = A.name;
+  $('sideRole').textContent = A.role;
+  $('sideAvatar').textContent = (A.name || 'A').charAt(0).toUpperCase();
+  if (A.role !== 'owner') $('tabAdmins').classList.add('hidden');
+  if (A.role === 'staff') {
+    document.querySelector('[data-tab="services"]').classList.add('hidden');
+    document.querySelector('[data-tab="gallery"]').classList.add('hidden');
+  }
+  loadStats();
+  loadRequests();
+}
+
+// Auto-login if token still valid (session only)
+if (A.token && A.name) enterAdmin();
+
+/* ============================================================
+   ADMIN — navigation
+   ============================================================ */
+document.querySelectorAll('.a-nav a').forEach(a => {
+  a.addEventListener('click', function () {
+    const tab = this.dataset.tab;
+    if (!tab) return;
+    document.querySelectorAll('.a-nav a').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+    A.tab = tab;
+    ['requests','services','gallery','admins'].forEach(t => {
+      $('panel' + t.charAt(0).toUpperCase() + t.slice(1)).classList.add('hidden');
+    });
+    $('panel' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('hidden');
+    $('pageTitle').textContent = { requests: 'Requests', services: 'Services', gallery: 'Gallery', admins: 'Admins' }[tab];
+    $('pageSub').textContent = {
+      requests: 'Manage all incoming student requests.',
+      services: 'Edit services shown on the public site.',
+      gallery: 'Upload images of projects and shop.',
+      admins: 'Manage admin accounts and roles.'
+    }[tab];
+    $('statsRow').classList.toggle('hidden', tab !== 'requests');
+    if (tab === 'services') loadServicesAdmin();
+    if (tab === 'gallery')  loadGalleryAdmin();
+    if (tab === 'admins')   loadAdminsAdmin();
+    if (window.innerWidth < 960) $('aSide').classList.remove('open');
+  });
+});
+$('aMenuToggle').addEventListener('click', () => $('aSide').classList.toggle('open'));
+
+$('refreshBtn').addEventListener('click', () => {
+  if (A.tab === 'requests') { loadStats(); loadRequests(); }
+  if (A.tab === 'services') loadServicesAdmin();
+  if (A.tab === 'gallery')  loadGalleryAdmin();
+  if (A.tab === 'admins')   loadAdminsAdmin();
+});
+
+/* ============================================================
+   ADMIN — data loaders
+   ============================================================ */
+function loadStats() {
+  api('adminGetStats', { token: A.token }).then(res => {
+    if (!res || !res.ok) return;
+    const s = res.stats;
+    $('statTotal').textContent  = s.total;
+    $('statPend').textContent   = s.pending;
+    $('statProg').textContent   = s.inProgress;
+    $('statReady').textContent  = s.ready;
+    $('statDone').textContent   = s.collected;
+    $('statToday').textContent  = s.today;
+  }).catch(() => {});
+}
+
+function loadRequests() {
+  $('reqBody').innerHTML = '<tr><td colspan="8" class="a-loading"><div class="spinner"></div>Loading…</td></tr>';
+  api('adminGetRequests', { token: A.token, status: A.filterStatus }).then(res => {
+    if (!res || !res.ok) { renderAuthError(); return; }
+    A.requests = res.requests;
+    renderRequests();
+  }).catch(() => $('reqBody').innerHTML = '<tr><td colspan="8" class="empty-row">Network error. Try again.</td></tr>');
+}
+
+function renderRequests() {
+  if (!A.requests.length) { $('reqBody').innerHTML = '<tr><td colspan="8" class="empty-row">No requests yet.</td></tr>'; return; }
+  $('reqBody').innerHTML = A.requests.map(r => `
+    <tr>
+      <td><strong>${esc(r.RequestID)}</strong></td>
+      <td>${fmtDate(r.Timestamp)}</td>
+      <td>${esc(r.StudentName)}${r.StudentID ? '<br><small style="color:var(--muted)">' + esc(r.StudentID) + '</small>' : ''}</td>
+      <td>${esc(r.Phone)}</td>
+      <td>${esc(r.ServiceType)}${r.UploadedFileURL ? ' <a href="' + esc(r.UploadedFileURL) + '" target="_blank" class="link">📎</a>' : ''}</td>
+      <td><span class="badge ${badgeClass(r.Status)}">${esc(r.Status)}</span></td>
+      <td>${r.AmountPaid ? '₦' + Number(r.AmountPaid).toLocaleString() : '—'}</td>
+      <td><div class="row-actions"><button class="icon-btn" onclick="openRequestModal('${esc(r.RequestID)}')">✏️</button></div></td>
+    </tr>`).join('');
+}
+
+$('statusFilters').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  document.querySelectorAll('#statusFilters button').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  A.filterStatus = e.target.dataset.status;
+  loadRequests();
+});
+
+function loadServicesAdmin() {
+  $('svcBody').innerHTML = '<tr><td colspan="6" class="a-loading"><div class="spinner"></div>Loading…</td></tr>';
+  api('getServicesPublic').then(res => {
+    if (!res || !res.ok) { renderAuthError(); return; }
+    A.services = res.services || [];
+    renderServicesAdmin();
+  }).catch(() => $('svcBody').innerHTML = '<tr><td colspan="6" class="empty-row">Network error.</td></tr>');
+}
+
+function renderServicesAdmin() {
+  if (!A.services.length) { $('svcBody').innerHTML = '<tr><td colspan="6" class="empty-row">No services yet.</td></tr>'; return; }
+  $('svcBody').innerHTML = A.services.map(s => `
+    <tr>
+      <td><small>${esc(s.ServiceID)}</small></td>
+      <td><strong>${esc(s.ServiceName)}</strong></td>
+      <td><span class="badge prog">${esc(s.Category)}</span></td>
+      <td>${esc(s.Price || '—')}</td>
+      <td><span class="badge ${String(s.Active).toLowerCase() === 'yes' ? 'ok' : 'off'}">${esc(s.Active)}</span></td>
+      <td><div class="row-actions">
+        <button class="icon-btn" onclick="openServiceModal('${esc(s.ServiceID)}')">✏️</button>
+        <button class="icon-btn" onclick="deleteService('${esc(s.ServiceID)}')">🗑</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function loadGalleryAdmin() {
+  $('galGrid').innerHTML = '<div class="a-loading" style="grid-column:1/-1"><div class="spinner"></div>Loading…</div>';
+  api('getGallery').then(res => {
+    A.gallery = res.gallery || [];
+    renderGalleryAdmin();
+  }).catch(() => {});
+}
+
+function renderGalleryAdmin() {
+  if (!A.gallery.length) {
+    $('galGrid').innerHTML = '<div class="empty-row" style="grid-column:1/-1">No images yet. Click "Upload image" above.</div>';
+    return;
+  }
+  $('galGrid').innerHTML = A.gallery.map(g => `
+    <div class="gal-item">
+      <img src="${esc(g.ImageURL)}" alt="${esc(g.Title)}" onerror="this.style.background='#eef4fc'">
+      <button class="del" onclick="deleteGallery('${esc(g.ImageID)}')" title="Delete">✕</button>
+      <div class="meta"><strong>${esc(g.Title)}</strong><span>${esc(g.Description || '')}</span></div>
+    </div>`).join('');
+}
+
+function loadAdminsAdmin() {
+  $('admBody').innerHTML = '<tr><td colspan="7" class="a-loading"><div class="spinner"></div>Loading…</td></tr>';
+  api('adminListAdmins', { token: A.token }).then(res => {
+    if (!res || !res.ok) { $('admBody').innerHTML = '<tr><td colspan="7" class="empty-row">Access denied.</td></tr>'; return; }
+    A.admins = res.admins || [];
+    renderAdminsAdmin();
+  }).catch(() => $('admBody').innerHTML = '<tr><td colspan="7" class="empty-row">Network error.</td></tr>');
+}
+
+function renderAdminsAdmin() {
+  if (!A.admins.length) { $('admBody').innerHTML = '<tr><td colspan="7" class="empty-row">No admins found.</td></tr>'; return; }
+  $('admBody').innerHTML = A.admins.map(a => `
+    <tr>
+      <td><small>${esc(a.AdminID)}</small></td>
+      <td><strong>${esc(a.Name)}</strong></td>
+      <td>${esc(a.Username)}</td>
+      <td><span class="badge prog">${esc(a.Role)}</span></td>
+      <td><span class="badge ${String(a.Active).toLowerCase() === 'yes' ? 'ok' : 'off'}">${esc(a.Active)}</span></td>
+      <td>${a.LastLogin ? fmtDate(a.LastLogin) : '—'}</td>
+      <td><div class="row-actions"><button class="icon-btn" onclick="openAdminModal('${esc(a.AdminID)}')">✏️</button></div></td>
+    </tr>`).join('');
+}
+
+/* ============================================================
+   ADMIN — actions
+   ============================================================ */
+function openRequestModal(id) {
+  const r = A.requests.find(x => x.RequestID === id);
+  if (!r) return;
+  A.editingRequest = r;
+  $('reqModalTitle').textContent = 'Update ' + r.RequestID;
+  $('reqModalSub').textContent = r.StudentName + ' — ' + r.ServiceType;
+  $('modalStatus').value = r.Status;
+  $('modalNotes').value = r.AdminNotes || '';
+  $('modalPaid').value = r.AmountPaid || 0;
+  $('reqModal').classList.add('show');
+}
+
+function saveRequestUpdate() {
+  const r = A.editingRequest;
+  if (!r) return;
+  const btn = $('reqSaveBtn');
+  btn.disabled = true; btn.textContent = 'Saving…';
+  const updates = {
+    Status: $('modalStatus').value,
+    AdminNotes: $('modalNotes').value.trim(),
+    AmountPaid: Number($('modalPaid').value) || 0
+  };
+  api('adminUpdateRequest', { token: A.token, requestId: r.RequestID, updates }).then(res => {
+    btn.disabled = false; btn.textContent = 'Save changes';
+    if (res.ok) { closeModal('reqModal'); toast('Request updated', 'ok'); loadStats(); loadRequests(); }
+    else toast(res.message || 'Failed', 'err');
+  }).catch(() => { btn.disabled = false; btn.textContent = 'Save changes'; toast('Network error', 'err'); });
+}
+
+function openServiceModal(id) {
+  const s = id ? A.services.find(x => x.ServiceID === id) : null;
+  A.editingService = s;
+  $('svcModalTitle').textContent = s ? 'Edit service' : 'Add service';
+  $('svcName').value = s ? s.ServiceName : '';
+  $('svcCategory').value = s ? s.Category : 'Walk-in';
+  $('svcPrice').value = s ? s.Price : '';
+  $('svcDesc').value = s ? s.Description : '';
+  $('svcActive').value = s ? s.Active : 'Yes';
+  $('svcOrder').value = s ? s.DisplayOrder : (A.services.length + 1);
+  $('svcModal').classList.add('show');
+}
+
+function saveService() {
+  const btn = $('svcSaveBtn');
+  const payload = {
+    ServiceName: $('svcName').value.trim(),
+    Category: $('svcCategory').value,
+    Description: $('svcDesc').value.trim(),
+    Price: $('svcPrice').value.trim(),
+    Active: $('svcActive').value,
+    DisplayOrder: Number($('svcOrder').value) || (A.services.length + 1)
+  };
+  if (!payload.ServiceName) { toast('Service name is required', 'err'); return; }
+  btn.disabled = true; btn.textContent = 'Saving…';
+  const isEdit = !!A.editingService;
+  const call = isEdit
+    ? api('adminUpdateService', { token: A.token, serviceId: A.editingService.ServiceID, updates: payload })
+    : api('adminAddService', { token: A.token, service: payload });
+  call.then(res => {
+    btn.disabled = false; btn.textContent = 'Save';
+    if (res.ok) { closeModal('svcModal'); toast(isEdit ? 'Service updated' : 'Service added', 'ok'); loadServicesAdmin(); }
+    else toast(res.message || 'Failed', 'err');
+  }).catch(() => { btn.disabled = false; btn.textContent = 'Save'; toast('Network error', 'err'); });
+}
+
+function deleteService(id) {
+  if (!confirm('Delete this service? This cannot be undone.')) return;
+  api('adminDeleteService', { token: A.token, serviceId: id }).then(res => {
+    if (res.ok) { toast('Service deleted', 'ok'); loadServicesAdmin(); }
+    else toast(res.message || 'Failed', 'err');
+  });
+}
+
+function openGalleryModal() {
+  $('galTitle').value = ''; $('galDesc').value = ''; $('galFile').value = '';
+  $('galModal').classList.add('show');
+}
+
+function saveGallery() {
+  const title = $('galTitle').value.trim();
+  const file = $('galFile').files[0];
+  if (!title) { toast('Title is required', 'err'); return; }
+  if (!file) { toast('Choose an image file', 'err'); return; }
+  if (file.size > 10 * 1024 * 1024) { toast('File too large (max 10MB)', 'err'); return; }
+  const btn = $('galSaveBtn');
+  btn.disabled = true; btn.textContent = 'Uploading…';
+  const reader = new FileReader();
+  reader.onload = () => {
+    const fileData = { name: file.name, mimeType: file.type, base64: reader.result.split(',')[1] };
+    api('adminUploadImage', { token: A.token, folder: 'Gallery', file: fileData })
+      .then(res => {
+        if (!res.ok) throw new Error(res.message || 'Upload failed');
+        return api('adminAddGalleryItem', {
+          token: A.token,
+          item: { Title: title, ImageURL: res.url, Description: $('galDesc').value.trim() }
+        });
+      })
+      .then(res2 => {
+        btn.disabled = false; btn.textContent = 'Upload';
+        if (res2.ok) { closeModal('galModal'); toast('Image uploaded', 'ok'); loadGalleryAdmin(); }
+        else toast(res2.message || 'Save failed', 'err');
+      })
+      .catch(err => { btn.disabled = false; btn.textContent = 'Upload'; toast(err.message || 'Upload failed', 'err'); });
+  };
+  reader.readAsDataURL(file);
+}
+
+function deleteGallery(id) {
+  if (!confirm('Remove this image from the gallery? (The Drive file stays, but it disappears from the site.)')) return;
+  api('adminDeleteGallery', { token: A.token, imageId: id }).then(res => {
+    if (res.ok) { toast('Image removed', 'ok'); loadGalleryAdmin(); }
+    else toast(res.message || 'Failed', 'err');
+  });
+}
+
+function openAdminModal(id) {
+  const a = id ? A.admins.find(x => x.AdminID === id) : null;
+  A.editingAdmin = a;
+  $('admModalTitle').textContent = a ? 'Edit admin' : 'Add admin';
+  $('admModalSub').textContent = a ? 'Leave password blank to keep it unchanged.' : 'Create a new admin account.';
+  $('admName').value = a ? a.Name : '';
+  $('admUsername').value = a ? a.Username : '';
+  $('admPassword').value = '';
+  $('admRole').value = a ? a.Role : 'staff';
+  $('admActive').value = a ? a.Active : 'Yes';
+  $('admModal').classList.add('show');
+}
+
+function saveAdmin() {
+  const btn = $('admSaveBtn');
+  const isEdit = !!A.editingAdmin;
+  const data = {
+    Name: $('admName').value.trim(),
+    Username: $('admUsername').value.trim(),
+    Password: $('admPassword').value,
+    Role: $('admRole').value,
+    Active: $('admActive').value
+  };
+  if (!data.Name || !data.Username) { toast('Name and username required', 'err'); return; }
+  if (!isEdit && (!data.Password || data.Password.length < 6)) { toast('Password must be at least 6 characters', 'err'); return; }
+  btn.disabled = true; btn.textContent = 'Saving…';
+  const call = isEdit
+    ? api('adminUpdateAdmin', { token: A.token, adminId: A.editingAdmin.AdminID, updates: (function () {
+        const u = { Name: data.Name, Username: data.Username, Role: data.Role, Active: data.Active };
+        if (data.Password) u.Password = data.Password;
+        return u;
+      })() })
+    : api('adminAddAdmin', { token: A.token, admin: data });
+  call.then(res => {
+    btn.disabled = false; btn.textContent = 'Save';
+    if (res.ok) { closeModal('admModal'); toast(isEdit ? 'Admin updated' : 'Admin added', 'ok'); loadAdminsAdmin(); }
+    else toast(res.message || 'Failed', 'err');
+  }).catch(() => { btn.disabled = false; btn.textContent = 'Save'; toast('Network error', 'err'); });
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function closeModal(id) { $(id).classList.remove('show'); }
+function toast(msg, kind) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (kind || '');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function fmtDate(d) {
+  if (!d) return '—';
+  try { return new Date(d).toLocaleString('en-NG', { dateStyle: 'short', timeStyle: 'short' }); }
+  catch (e) { return String(d); }
 }
 function badgeClass(status) {
   const s = String(status).toLowerCase();
@@ -591,6 +1304,14 @@ function badgeClass(status) {
   if (s === 'collected') return 'done';
   if (s === 'in progress') return 'prog';
   return 'pend';
+}
+function renderAuthError() {
+  sessionStorage.clear();
+  A.token = A.name = A.role = '';
+  $('adminApp').classList.add('hidden');
+  $('publicSite').classList.remove('hidden');
+  document.body.style.overflow = '';
+  toast('Session expired — please sign in again', 'err');
 }
 function onErr(err) { console.error(err); }
 function iconFor(name) {
@@ -607,6 +1328,11 @@ function iconFor(name) {
   if (n.includes('cv') || n.includes('cover')) return '📝';
   return '⚙️';
 }
+
+// Close modal on backdrop click
+document.querySelectorAll('.modal-backdrop').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
+});
 </script>
 </body>
 </html>
