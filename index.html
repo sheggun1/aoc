@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   SHARED TOKENS
+   TOKENS
    ============================================================ */
 :root{
   --navy:#07224f;--blue:#0B3D91;--cyan:#00B4D8;--cyan-soft:#e3f8fd;--sky:#eef4fc;
@@ -29,7 +29,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .hidden{display:none!important}
 
 /* ============================================================
-   PUBLIC SITE STYLES
+   PUBLIC SITE
    ============================================================ */
 .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:10px;font-weight:700;font-size:15px;border:0;transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
@@ -49,6 +49,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .link{color:var(--blue);font-weight:700;font-size:14px}
 .link:hover{text-decoration:underline}
 
+/* Nav */
 .nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .25s,box-shadow .25s}
 .nav.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
@@ -65,6 +66,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .burger i{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
 .nav.scrolled .burger i{background:var(--ink)}
 
+/* Hero */
 .hero{background:var(--navy);color:#fff;padding:150px 0 110px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 70% at 85% 10%,rgba(0,180,216,.28),transparent 70%),radial-gradient(50% 60% at 0% 100%,rgba(11,61,145,.9),transparent 70%)}
 .hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 80%)}
@@ -91,6 +93,7 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .tag.ok{background:#e4f6ec;color:var(--ok)}.tag.pend{background:#fdf0dc;color:var(--pend)}
 .t-foot{background:var(--sky);padding:12px 24px;border-radius:0 0 18px 18px;font-size:12.5px;color:var(--muted);font-weight:600;text-align:center}
 
+/* Sections */
 .sec{padding:96px 0}
 .alt{background:var(--paper)}
 .head{max-width:640px;margin-bottom:48px}
@@ -113,10 +116,10 @@ h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
 .empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);background:#fff;border:1.5px dashed var(--line);border-radius:16px}
 
 .ptable{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh);overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:480px}
-th{text-align:left;padding:15px 24px;font-size:13px;font-weight:700;color:var(--muted);background:var(--sky)}
-td{padding:16px 24px;border-top:1px solid var(--sky);font-size:15.5px;font-weight:500}
-tbody tr:hover td{background:#fafdff}
+.ptable table{width:100%;border-collapse:collapse;min-width:480px}
+.ptable th{text-align:left;padding:15px 24px;font-size:13px;font-weight:700;color:var(--muted);background:var(--sky)}
+.ptable td{padding:16px 24px;border-top:1px solid var(--sky);font-size:15.5px;font-weight:500}
+.ptable tbody tr:hover td{background:#fafdff}
 .r{text-align:right}
 .price{font:800 18px var(--head);color:var(--navy)}
 .unit{display:block;font:500 12px var(--body);color:var(--muted)}
@@ -186,6 +189,7 @@ textarea{resize:vertical;min-height:100px}
 .cc p{font-size:15px;color:var(--ink2);margin-bottom:12px;white-space:pre-line}
 .cc .muted{font-size:13.5px;color:var(--muted);font-weight:600}
 
+/* Footer */
 .foot{background:var(--navy);color:#fff;padding:56px 0 24px}
 .f-in{display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.12)}
 .f-brand{display:flex;gap:14px;max-width:380px}
@@ -194,7 +198,15 @@ textarea{resize:vertical;min-height:100px}
 .f-links{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
 .f-links a{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.75)}.f-links a:hover{color:#fff}
 .f-bot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:22px;font-size:13px;color:rgba(255,255,255,.5)}
-.f-bot a{font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.18);border-radius:6px;cursor:pointer}.f-bot a:hover{color:#fff}
+.staff-login{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  padding:10px 18px;border-radius:10px;
+  background:var(--cyan);color:var(--navy);
+  box-shadow:0 8px 20px -8px rgba(0,180,216,.7);
+  transition:all .15s;cursor:pointer;
+}
+.staff-login:hover{background:#2cc6e6;transform:translateY(-1px)}
 
 .wa{position:fixed;right:22px;bottom:22px;z-index:90;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 20px 14px 16px;border-radius:99px;font-weight:700;font-size:15px;box-shadow:0 14px 30px -10px rgba(37,211,102,.75);transition:transform .2s}
 .wa:hover{transform:translateY(-3px)}
@@ -212,7 +224,7 @@ textarea{resize:vertical;min-height:100px}
 .login-card p{font-size:14.5px;color:var(--ink2);margin-bottom:24px}
 
 /* ============================================================
-   ADMIN DASHBOARD STYLES
+   ADMIN DASHBOARD
    ============================================================ */
 .admin-app{position:fixed;inset:0;background:var(--paper);z-index:2000;display:grid;grid-template-columns:250px 1fr;overflow:hidden}
 .admin-app.hidden{display:none}
@@ -297,9 +309,7 @@ textarea{resize:vertical;min-height:100px}
 .toast.ok{background:var(--ok)}
 .toast.err{background:var(--err)}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* Responsive */
 @media(max-width:960px){
   .hero-in,.two{grid-template-columns:1fr;gap:44px}
   .ticket{margin:0 auto}
@@ -512,7 +522,7 @@ textarea{resize:vertical;min-height:100px}
   </div>
   <div class="wrap f-bot">
     <span>© <span id="year"></span> AOC Dynamic Concept. All rights reserved.</span>
-    <a id="adminOpenBtn">Admin</a>
+    <a id="adminOpenBtn" class="staff-login">🔐 Staff Login</a>
   </div>
 </footer>
 
@@ -654,7 +664,6 @@ textarea{resize:vertical;min-height:100px}
   </main>
 </div>
 
-
 <!-- ============ ADMIN MODALS ============ -->
 <div class="modal-backdrop" id="reqModal">
   <div class="modal">
@@ -733,13 +742,43 @@ textarea{resize:vertical;min-height:100px}
 
 
 <!-- ============================================================
-     JAVASCRIPT
+     API HELPER (inline — no separate config.js needed)
      ============================================================ -->
-<script src="assets/config.js"></script>
 <script>
-/* ============================================================
-   STATE
-   ============================================================ */
+const API_URL = 'https://script.google.com/macros/s/AKfycbzAQ02VyjeRKyQuDofHdGgFirCrhGGUP5zO3_2wDpw_1fvfrJfnG_YlO2yCZ4rtNGZyow/exec';
+
+async function api(action, payload = {}) {
+  const url = new URL(API_URL);
+  url.searchParams.set('action', action);
+  if (Object.keys(payload).length > 0) {
+    url.searchParams.set('payload', b64Encode(JSON.stringify(payload)));
+  }
+  let res;
+  try {
+    res = await fetch(url.toString(), { method: 'GET', redirect: 'follow', headers: { 'Accept': 'application/json' } });
+  } catch (err) {
+    console.error('[API network]', action, err);
+    throw new Error('Network error — check your connection.');
+  }
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const text = await res.text();
+  let data;
+  try { data = JSON.parse(text); }
+  catch (e) {
+    console.error('[API bad JSON]', action, text.slice(0, 300));
+    throw new Error('Server returned invalid response.');
+  }
+  if (data.ok === false && data.message) console.warn('[API]', action, '→', data.message);
+  return data;
+}
+
+function b64Encode(str) { return btoa(unescape(encodeURIComponent(str))); }
+</script>
+
+<!-- ============================================================
+     APP LOGIC
+     ============================================================ -->
+<script>
 let SERVICES = [];
 const SITE = {
   phone: '2348000000000',
@@ -758,9 +797,7 @@ const A = {
 };
 const $ = id => document.getElementById(id);
 
-/* ============================================================
-   PUBLIC SITE
-   ============================================================ */
+/* ---------- PUBLIC ---------- */
 $('year').textContent = new Date().getFullYear();
 
 const nav = $('nav'), navLinks = $('navLinks');
@@ -905,12 +942,10 @@ function checkStatus() {
   $('contactHours').textContent = SITE.hours;
 })();
 
-/* ============================================================
-   ADMIN — login / logout / show/hide
-   ============================================================ */
+/* ---------- ADMIN: open login / show dashboard ---------- */
 $('adminOpenBtn').addEventListener('click', () => {
   $('loginBackdrop').classList.add('show');
-  $('loginUser').focus();
+  setTimeout(() => $('loginUser').focus(), 50);
 });
 $('cancelLoginBtn').addEventListener('click', () => $('loginBackdrop').classList.remove('show'));
 
@@ -947,6 +982,7 @@ $('logoutBtn').addEventListener('click', function () {
   $('adminApp').classList.add('hidden');
   $('publicSite').classList.remove('hidden');
   document.body.style.overflow = '';
+  window.scrollTo(0, 0);
 });
 
 function enterAdmin() {
@@ -965,12 +1001,10 @@ function enterAdmin() {
   loadRequests();
 }
 
-// Auto-login if token still valid (session only)
+// Auto-login if session exists
 if (A.token && A.name) enterAdmin();
 
-/* ============================================================
-   ADMIN — navigation
-   ============================================================ */
+/* ---------- ADMIN: nav ---------- */
 document.querySelectorAll('.a-nav a').forEach(a => {
   a.addEventListener('click', function () {
     const tab = this.dataset.tab;
@@ -1005,9 +1039,7 @@ $('refreshBtn').addEventListener('click', () => {
   if (A.tab === 'admins')   loadAdminsAdmin();
 });
 
-/* ============================================================
-   ADMIN — data loaders
-   ============================================================ */
+/* ---------- ADMIN: loaders ---------- */
 function loadStats() {
   api('adminGetStats', { token: A.token }).then(res => {
     if (!res || !res.ok) return;
@@ -1122,9 +1154,7 @@ function renderAdminsAdmin() {
     </tr>`).join('');
 }
 
-/* ============================================================
-   ADMIN — actions
-   ============================================================ */
+/* ---------- ADMIN: actions ---------- */
 function openRequestModal(id) {
   const r = A.requests.find(x => x.RequestID === id);
   if (!r) return;
@@ -1233,7 +1263,7 @@ function saveGallery() {
 }
 
 function deleteGallery(id) {
-  if (!confirm('Remove this image from the gallery? (The Drive file stays, but it disappears from the site.)')) return;
+  if (!confirm('Remove this image from the gallery?')) return;
   api('adminDeleteGallery', { token: A.token, imageId: id }).then(res => {
     if (res.ok) { toast('Image removed', 'ok'); loadGalleryAdmin(); }
     else toast(res.message || 'Failed', 'err');
@@ -1280,9 +1310,7 @@ function saveAdmin() {
   }).catch(() => { btn.disabled = false; btn.textContent = 'Save'; toast('Network error', 'err'); });
 }
 
-/* ============================================================
-   HELPERS
-   ============================================================ */
+/* ---------- HELPERS ---------- */
 function closeModal(id) { $(id).classList.remove('show'); }
 function toast(msg, kind) {
   const t = $('toast');
@@ -1329,7 +1357,16 @@ function iconFor(name) {
   return '⚙️';
 }
 
-// Close modal on backdrop click
+// Ctrl+Shift+A → quick admin login
+document.addEventListener('keydown', function (e) {
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+    e.preventDefault();
+    if (A.token && A.name) enterAdmin();
+    else { $('loginBackdrop').classList.add('show'); setTimeout(() => $('loginUser').focus(), 50); }
+  }
+});
+
+// Close modals on backdrop click
 document.querySelectorAll('.modal-backdrop').forEach(m => {
   m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
 });
