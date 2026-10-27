@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AOC Dynamic Concept | Printing, Projects, Clearance</title>
+<meta name="description" content="AOC Dynamic Concept: photocopy, printing, project work, clearance, transcript collection, typing and binding. Walk in or request online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#07224f;--blue:#0B3D91;--cyan:#00B4D8;--cyan-soft:#e3f8fd;--sky:#eef4fc;
+  --paper:#f6f9fd;--ink:#0d1b2a;--ink2:#3d4e63;--muted:#6b7d92;--line:#dfe8f2;
+  --ok:#0f9d58;--pend:#d97706;--err:#d92d20;
+  --head:'Bricolage Grotesque','Figtree',system-ui,sans-serif;
+  --body:'Figtree',system-ui,-apple-system,sans-serif;
+  --sh:0 18px 40px -18px rgba(7,34,79,.28);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:var(--body);color:var(--ink);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.02em;line-height:1.1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:10px;font-weight:700;font-size:15px;border:0;transition:transform .15s,box-shadow .15s,background .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.btn-lg{padding:16px 28px;font-size:16px}
+.btn-sm{padding:9px 16px;font-size:14px}
+.btn-block{width:100%}
+.btn-cyan{background:var(--cyan);color:var(--navy);box-shadow:0 10px 24px -10px rgba(0,180,216,.8)}
+.btn-cyan:hover{background:#2cc6e6}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 10px 24px -10px rgba(11,61,145,.7)}
+.btn-blue:hover{background:var(--navy)}
+.btn-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-line:hover{background:rgba(255,255,255,.1)}
+.link{color:var(--blue);font-weight:700;font-size:14px}
+.link:hover{text-decoration:underline}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto;z-index:100;transition:background .25s,box-shadow .25s}
+.nav.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:42px;height:42px;border-radius:11px;background:var(--cyan);color:var(--navy);display:grid;place-items:center;font:800 14px var(--head);letter-spacing:.02em}
+.brand b{display:block;font:800 17px var(--head);color:#fff;line-height:1.1;transition:color .25s}
+.brand small{font-size:11.5px;color:rgba(255,255,255,.7);transition:color .25s}
+.nav.scrolled .brand b{color:var(--navy)}.nav.scrolled .brand small{color:var(--muted)}
+.links{display:flex;align-items:center;gap:26px}
+.links a:not(.btn){font-size:14.5px;font-weight:600;color:rgba(255,255,255,.85);transition:color .2s}
+.links a:not(.btn):hover{color:#fff}
+.nav.scrolled .links a:not(.btn){color:var(--ink2)}.nav.scrolled .links a:not(.btn):hover{color:var(--blue)}
+.burger{display:none;background:none;border:0;padding:8px}
+.burger i{display:block;width:22px;height:2px;background:#fff;margin:5px 0;border-radius:2px}
+.nav.scrolled .burger i{background:var(--ink)}
+
+/* Hero */
+.hero{background:var(--navy);color:#fff;padding:150px 0 110px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 70% at 85% 10%,rgba(0,180,216,.28),transparent 70%),radial-gradient(50% 60% at 0% 100%,rgba(11,61,145,.9),transparent 70%)}
+.hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(180deg,#000,transparent 80%)}
+.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.open{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:7px 14px;border-radius:99px;font-size:13.5px;font-weight:600;margin-bottom:26px}
+.open i{width:8px;height:8px;border-radius:50%;background:#3ddc97;box-shadow:0 0 0 0 rgba(61,220,151,.6);animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(61,220,151,0)}}
+.hero h1{font-size:clamp(42px,6vw,72px);font-weight:800;margin-bottom:22px}
+.lede{font-size:18.5px;color:rgba(255,255,255,.8);max-width:520px;margin-bottom:34px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.facts{display:flex;gap:28px;flex-wrap:wrap;font-size:14.5px;color:rgba(255,255,255,.82);font-weight:500}
+.facts span{display:flex;align-items:center;gap:8px}
+.facts svg{color:var(--cyan)}
+
+/* Job ticket */
+.ticket{background:#fff;color:var(--ink);border-radius:18px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);transform:rotate(1.6deg);position:relative;max-width:410px;margin-left:auto}
+.t-top{padding:22px 24px 18px;display:flex;justify-content:space-between;align-items:center}
+.t-top b{font:800 15px var(--head)}
+.t-top span{font-size:12px;color:var(--muted);font-weight:600}
+.t-cut{position:relative;border-top:2px dashed var(--line);margin:0 18px}
+.t-cut::before,.t-cut::after{content:'';position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--navy)}
+.t-cut::before{left:-30px}.t-cut::after{right:-30px}
+.t-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 24px;font-size:14.5px;font-weight:500;border-bottom:1px solid var(--sky)}
+.t-row:last-of-type{border:0;padding-bottom:22px}
+.tag{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px;background:var(--sky);color:var(--blue);white-space:nowrap}
+.tag.ok{background:#e4f6ec;color:var(--ok)}.tag.pend{background:#fdf0dc;color:var(--pend)}
+.t-foot{background:var(--sky);padding:12px 24px;border-radius:0 0 18px 18px;font-size:12.5px;color:var(--muted);font-weight:600;text-align:center}
+
+/* Sections */
+.sec{padding:96px 0}
+.alt{background:var(--paper)}
+.head{max-width:640px;margin-bottom:48px}
+.head.c{margin-inline:auto;text-align:center}
+.head h2{font-size:clamp(30px,4vw,44px);font-weight:800;color:var(--navy);margin-bottom:12px}
+.head p{font-size:17px;color:var(--ink2)}
+
+/* Services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s,transform .2s}
+.svc:hover{border-color:var(--cyan);box-shadow:var(--sh);transform:translateY(-3px)}
+.svc-ico{width:50px;height:50px;border-radius:13px;background:var(--cyan-soft);display:grid;place-items:center;font-size:24px;margin-bottom:18px}
+.svc h3{font-size:20px;color:var(--navy);margin-bottom:8px}
+.svc p{font-size:14.5px;color:var(--ink2);flex:1;margin-bottom:18px}
+.svc-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--sky);padding-top:14px}
+.svc-price{font:800 16px var(--head);color:var(--blue)}
+.svc-go{font-size:13.5px;font-weight:700;color:var(--blue)}
+.svc-go:hover{text-decoration:underline}
+.skel{height:230px;border-radius:16px;background:linear-gradient(90deg,#eef3f9,#f8fbfe,#eef3f9);background-size:200% 100%;animation:sh 1.4s infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--muted);background:#fff;border:1.5px dashed var(--line);border-radius:16px}
+
+/* Prices */
+.ptable{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--sh);overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:480px}
+th{text-align:left;padding:15px 24px;font-size:13px;font-weight:700;color:var(--muted);background:var(--sky)}
+td{padding:16px 24px;border-top:1px solid var(--sky);font-size:15.5px;font-weight:500}
+tbody tr:hover td{background:#fafdff}
+.r{text-align:right}
+.price{font:800 18px var(--head);color:var(--navy)}
+.unit{display:block;font:500 12px var(--body);color:var(--muted)}
+.cat{font-size:12px;font-weight:600;color:var(--ink2);background:var(--sky);padding:4px 11px;border-radius:99px}
+.loading{text-align:center;color:var(--muted);padding:40px!important}
+.note{text-align:center;color:var(--muted);font-size:14px;margin-top:18px}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.gi{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.gi .im{overflow:hidden;aspect-ratio:4/3;background:var(--sky)}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.gi:hover img{transform:scale(1.05)}
+.gi div.m{padding:16px 20px}
+.gi strong{display:block;font-size:15.5px;color:var(--navy)}
+.gi span{font-size:13.5px;color:var(--muted)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative}
+.step{padding:0 28px 0 0;position:relative}
+.step .n{width:46px;height:46px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font:800 18px var(--head);margin-bottom:20px;position:relative;z-index:1}
+.step:not(:last-child)::before{content:'';position:absolute;top:22px;left:56px;right:10px;border-top:2px dashed #b9cde6}
+.step h3{font-size:20px;color:var(--navy);margin-bottom:8px}
+.step p{font-size:15px;color:var(--ink2);max-width:300px}
+
+/* Request */
+.two{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
+.copy h2{font-size:clamp(30px,4vw,42px);font-weight:800;color:var(--navy);margin-bottom:14px}
+.copy>p{font-size:17px;color:var(--ink2);margin-bottom:28px}
+.perks{display:flex;flex-direction:column;gap:14px}
+.perk{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--ink2);font-size:15.5px}
+.perk i{font-style:normal;width:26px;height:26px;border-radius:50%;background:#e4f6ec;color:var(--ok);display:grid;place-items:center;font-size:13px;font-weight:800;flex:none}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:34px;box-shadow:var(--sh)}
+.field{margin-bottom:18px}
+label{display:block;font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:7px}
+input[type=text],input[type=tel],textarea,select{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font:500 15.5px var(--body);color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,61,145,.1)}
+textarea{resize:vertical;min-height:100px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.hint{display:none;padding:10px 14px;background:var(--cyan-soft);color:var(--blue);border-radius:10px;font-size:14px;font-weight:600;margin:-6px 0 18px}
+.hint.show{display:block}
+.file{position:relative}
+.file input{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2;width:100%}
+.file-l{display:flex;align-items:center;justify-content:center;gap:10px;padding:20px;border:2px dashed #c4d5e8;border-radius:10px;color:var(--muted);font-weight:600;font-size:14.5px;background:var(--paper);transition:all .2s}
+.file:hover .file-l{border-color:var(--blue);color:var(--blue);background:var(--sky)}
+.fp-item{margin-top:10px;display:flex;justify-content:space-between;gap:10px;padding:10px 14px;background:var(--sky);color:var(--blue);border-radius:10px;font-size:13.5px;font-weight:600}
+.fp-item.err{background:#fef0ee;color:var(--err)}
+.msg{margin-top:14px;font-size:14.5px;font-weight:600;text-align:center}
+.msg.ok{color:var(--ok)}.msg.err{color:var(--err)}
+
+/* Status */
+.stat{background:var(--navy);color:#fff}
+.stat .copy h2{color:#fff}.stat .copy>p{color:rgba(255,255,255,.78);margin:0}
+.stat .card{border:0}
+.s-in{display:flex;gap:10px;margin-bottom:18px}
+.s-in input{flex:1;min-width:0;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;font:500 15.5px var(--body)}
+.s-in input:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 4px rgba(11,61,145,.1)}
+.s-msg{text-align:center;padding:22px;color:var(--muted);font-size:14.5px}
+.s-item{padding:16px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+.s-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.s-top strong{font:800 15px var(--head);color:var(--navy)}
+.s-meta{font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.s-note{font-size:13.5px;color:var(--ink2);padding:9px 12px;background:var(--paper);border-radius:8px;margin-bottom:8px}
+.badge{font-size:11.5px;font-weight:700;padding:4px 11px;border-radius:99px}
+.badge.ok{background:#e4f6ec;color:var(--ok)}.badge.pend{background:#fdf0dc;color:var(--pend)}
+.badge.prog{background:var(--sky);color:var(--blue)}.badge.done{background:#eceff3;color:var(--muted)}
+
+/* Contact */
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cc{border:1px solid var(--line);border-radius:16px;padding:28px;background:#fff}
+.ci{width:48px;height:48px;border-radius:12px;background:var(--cyan-soft);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
+.cc h3{font-size:18px;color:var(--navy);margin-bottom:6px}
+.cc p{font-size:15px;color:var(--ink2);margin-bottom:12px;white-space:pre-line}
+.cc .muted{font-size:13.5px;color:var(--muted);font-weight:600}
+
+/* Footer */
+.foot{background:var(--navy);color:#fff;padding:56px 0 24px}
+.f-in{display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.12)}
+.f-brand{display:flex;gap:14px;max-width:380px}
+.f-brand b{font:800 17px var(--head)}
+.f-brand p{font-size:14px;color:rgba(255,255,255,.65);margin-top:4px}
+.f-links{display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+.f-links a{font-size:14.5px;font-weight:500;color:rgba(255,255,255,.75)}.f-links a:hover{color:#fff}
+.f-bot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:22px;font-size:13px;color:rgba(255,255,255,.5)}
+.f-bot a{font-size:12px;padding:4px 10px;border:1px solid rgba(255,255,255,.18);border-radius:6px}.f-bot a:hover{color:#fff}
+
+.wa{position:fixed;right:22px;bottom:22px;z-index:90;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 20px 14px 16px;border-radius:99px;font-weight:700;font-size:15px;box-shadow:0 14px 30px -10px rgba(37,211,102,.75);transition:transform .2s}
+.wa:hover{transform:translateY(-3px)}
+
+@media(max-width:960px){
+  .hero-in,.two{grid-template-columns:1fr;gap:44px}
+  .ticket{margin:0 auto}
+  .svc-grid,.gal,.c3{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr;gap:30px}.step::before{display:none}
+}
+@media(max-width:700px){
+  .wrap{padding:0 20px}.sec{padding:64px 0}.hero{padding:116px 0 70px}
+  .svc-grid,.gal,.c3,.row{grid-template-columns:1fr}
+  .burger{display:block}
+  .links{position:fixed;top:72px;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 20px;box-shadow:0 20px 30px -20px rgba(7,34,79,.4);transform:translateY(-130%);transition:transform .3s}
+  .links.open{transform:none}
+  .links a:not(.btn){color:var(--ink2)!important;padding:13px 0;border-bottom:1px solid var(--sky)}
+  .links .btn{margin-top:14px}
+  .card{padding:24px}.s-in{flex-direction:column}
+  .wa{padding:14px;right:16px;bottom:16px}.wa span{display:none}
+  td,th{padding:14px 16px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.ticket{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="brand" aria-label="AOC Dynamic Concept home">
+      <div class="mark">AOC</div>
+      <div><b>Dynamic Concept</b><small>Computer &amp; Business Center</small></div>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#prices">Prices</a>
+      <a href="#gallery">Our work</a>
+      <a href="#status">Track request</a>
+      <a href="#contact">Contact</a>
+      <a href="#request" class="btn btn-cyan btn-sm">Make a request</a>
+    </nav>
+    <button class="burger" id="navToggle" aria-label="Open menu"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <div class="open"><i></i> Open now. Walk in or request online</div>
+      <h1>Print it. Finish it. Clear it.</h1>
+      <p class="lede">Photocopy, printing, project work, clearance and transcript collection, handled by one friendly team so you can focus on everything else.</p>
+      <div class="cta">
+        <a href="#request" class="btn btn-cyan btn-lg">Make a request</a>
+        <a href="#" id="waHero" class="btn btn-line btn-lg" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+      <div class="facts">
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No sign-up needed</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Upload files online</span>
+        <span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Track status anytime</span>
+      </div>
+    </div>
+    <div class="ticket" aria-hidden="true">
+      <div class="t-top"><b>Job ticket</b><span>Sample · #AOC-042</span></div>
+      <div class="t-cut"></div>
+      <div class="t-row"><span>Project work, Ch 1–5</span><em class="tag" style="font-style:normal">In progress</em></div>
+      <div class="t-row"><span>Clearance</span><em class="tag ok" style="font-style:normal">Ready</em></div>
+      <div class="t-row"><span>Transcript collection</span><em class="tag pend" style="font-style:normal">Pending</em></div>
+      <div class="t-row"><span>Printing, 40 pages</span><em class="tag ok" style="font-style:normal">Collected</em></div>
+      <div class="t-foot">Check your own status anytime with your phone number</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>Everything you need, under one roof</h2>
+      <p>Walk in for quick jobs, or send your request online and pick up when it is ready.</p>
+    </div>
+    <div class="svc-grid" id="servicesGrid"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+  </div>
+</section>
+
+<section class="sec alt" id="prices">
+  <div class="wrap">
+    <div class="head c">
+      <h2>Clear prices, no surprises</h2>
+      <p>Bulk jobs may qualify for a discount. Just ask us.</p>
+    </div>
+    <div class="ptable">
+      <table id="priceTable">
+        <thead><tr><th>Item</th><th>Category</th><th class="r">Price</th></tr></thead>
+        <tbody><tr><td colspan="3" class="loading">Loading prices…</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <div class="head">
+      <h2>Work we are proud of</h2>
+      <p>Recent projects and a look inside our shop.</p>
+    </div>
+    <div class="gal" id="galleryGrid"><div class="empty">Loading gallery…</div></div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="head"><h2>How it works</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><h3>Send your request</h3><p>Fill the form with your name, phone and service. Attach a file if your job needs one.</p></div>
+      <div class="step"><div class="n">2</div><h3>We get to work</h3><p>Our team handles your job and keeps you updated by phone.</p></div>
+      <div class="step"><div class="n">3</div><h3>Pick up or download</h3><p>Collect at the shop when it is ready, or download your finished file online.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="request">
+  <div class="wrap two">
+    <div class="copy">
+      <h2>Tell us what you need</h2>
+      <p>Send your request now and upload your file, so your job is already moving when you arrive.</p>
+      <div class="perks">
+        <div class="perk"><i>✓</i>No sign-up required</div>
+        <div class="perk"><i>✓</i>Upload files up to 10MB</div>
+        <div class="perk"><i>✓</i>We reply within 30 minutes</div>
+        <div class="perk"><i>✓</i>Track status with your phone number</div>
+      </div>
+    </div>
+    <div class="card">
+      <form id="requestForm" novalidate>
+        <div class="field"><label for="f1">Full name *</label><input id="f1" type="text" name="studentName" required placeholder="e.g. Chinedu Okonkwo" autocomplete="name"></div>
+        <div class="row">
+          <div class="field"><label for="f2">Student ID</label><input id="f2" type="text" name="studentID" placeholder="e.g. CSC/2020/001"></div>
+          <div class="field"><label for="f3">Phone number *</label><input id="f3" type="tel" name="phone" required placeholder="08012345678" autocomplete="tel" onblur="lookupStudent(this.value)"></div>
+        </div>
+        <div class="hint" id="returningHint"></div>
+        <div class="field"><label for="serviceSelect">Service *</label>
+          <select name="serviceType" required id="serviceSelect"><option value="">Select a service…</option></select></div>
+        <div class="field"><label for="f4">Details</label>
+          <textarea id="f4" name="details" rows="4" placeholder="e.g. Print 40 pages in colour, spiral bound"></textarea></div>
+        <div class="field"><label>Attach a file (optional, max 10MB)</label>
+          <div class="file" id="fileInputWrap">
+            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.zip" aria-label="Attach a file">
+            <div class="file-l"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg><span>Choose a file to upload</span></div>
+          </div>
+          <div id="filePreview"></div>
+        </div>
+        <button type="submit" class="btn btn-blue btn-lg btn-block" id="submitBtn">Send request</button>
+        <div class="msg" id="formMsg" role="status"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec stat" id="status">
+  <div class="wrap two">
+    <div class="copy">
+      <h2>Is your request ready?</h2>
+      <p>Enter your phone number or student ID to see where your job stands. No need to call.</p>
+    </div>
+    <div class="card">
+      <div class="s-in">
+        <input type="text" id="statusInput" placeholder="Phone number or student ID" aria-label="Phone number or student ID">
+        <button class="btn btn-blue" id="statusBtn">Check status</button>
+      </div>
+      <div id="statusResult" role="status"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contact">
+  <div class="wrap">
+    <div class="head"><h2>Visit us or get in touch</h2></div>
+    <div class="c3">
+      <div class="cc">
+        <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3>Location</h3><p id="contactAddress">Loading address…</p>
+        <a id="directionsLink" class="link" target="_blank" rel="noopener" href="#">Get directions</a>
+      </div>
+      <div class="cc">
+        <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>Call or WhatsApp</h3><p id="contactPhone">Loading phone…</p>
+        <a id="waLink" class="link" target="_blank" rel="noopener" href="#">Chat on WhatsApp</a>
+      </div>
+      <div class="cc">
+        <div class="ci"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h3>Opening hours</h3><p id="contactHours">Loading hours…</p>
+        <span class="muted">Closed on Sundays</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap f-in">
+    <div class="f-brand"><div class="mark">AOC</div><div><b>AOC Dynamic Concept</b><p>Computer &amp; business center for printing, projects, clearance and more.</p></div></div>
+    <div class="f-links">
+      <a href="#services">Services</a><a href="#prices">Prices</a><a href="#request">Make a request</a><a href="#status">Track request</a><a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="wrap f-bot">
+    <span>© <span id="year"></span> AOC Dynamic Concept. All rights reserved.</span>
+    <a href="?page=Admin">Admin</a>
+  </div>
+</footer>
+
+<a href="#" id="waFloat" class="wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>Chat with us</span>
+</a>
+
+<script>
+let SERVICES = [];
+const SITE = {
+  phone: '2348000000000',
+  phoneDisplay: '+234 800 000 0000',
+  address: 'AOC Dynamic Concept, Nigeria',
+  hours: 'Mon – Sat: 8:00am – 6:00pm'
+};
+const $ = id => document.getElementById(id);
+$('year').textContent = new Date().getFullYear();
+
+// Nav
+const nav = $('nav'), navLinks = $('navLinks');
+$('navToggle').addEventListener('click', () => { navLinks.classList.toggle('open'); nav.classList.add('scrolled'); });
+document.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20 || navLinks.classList.contains('open'));
+window.addEventListener('scroll', onScroll); onScroll();
+
+// Services
+google.script.run.withSuccessHandler(onServices).withFailureHandler(onErr).getServices();
+function onServices(list) {
+  SERVICES = list || [];
+  const grid = $('servicesGrid'), sel = $('serviceSelect');
+  if (!SERVICES.length) { grid.innerHTML = '<div class="empty">Our services will be listed here soon.</div>'; return; }
+  grid.innerHTML = SERVICES.map(s => `
+    <div class="svc">
+      <div class="svc-ico">${iconFor(s.ServiceName)}</div>
+      <h3>${esc(s.ServiceName)}</h3>
+      <p>${esc(s.Description || '')}</p>
+      <div class="svc-foot">
+        <span class="svc-price">${esc(s.Price || 'Ask for price')}</span>
+        <a href="#request" class="svc-go" data-svc="${esc(s.ServiceName)}">Request this</a>
+      </div>
+    </div>`).join('');
+  sel.innerHTML = '<option value="">Select a service…</option>' +
+    SERVICES.map(s => `<option value="${esc(s.ServiceName)}">${esc(s.ServiceName)}${s.Price ? ' — ' + esc(s.Price) : ''}</option>`).join('');
+  grid.querySelectorAll('.svc-go').forEach(a => a.addEventListener('click', () => { sel.value = a.dataset.svc; }));
+}
+
+// Prices
+google.script.run.withSuccessHandler(onPrices).withFailureHandler(onErr).getPriceList();
+function onPrices(list) {
+  const tb = document.querySelector('#priceTable tbody');
+  if (!list || !list.length) { tb.innerHTML = '<tr><td colspan="3" class="loading">Prices will be published here soon.</td></tr>'; return; }
+  tb.innerHTML = list.map(p => `
+    <tr>
+      <td>${esc(p.Item)}</td>
+      <td><span class="cat">${esc(p.Category)}</span></td>
+      <td class="r price">₦${Number(p.Price).toLocaleString()}<span class="unit">${esc(p.Unit)}</span></td>
+    </tr>`).join('');
+}
+
+// Gallery
+google.script.run.withSuccessHandler(onGallery).withFailureHandler(onErr).getGallery();
+function onGallery(list) {
+  const grid = $('galleryGrid');
+  if (!list || !list.length) { grid.innerHTML = '<div class="empty">Photos of our work are coming soon. Visit the shop to see samples.</div>'; return; }
+  grid.innerHTML = list.slice(0, 9).map(g => `
+    <div class="gi">
+      <div class="im"><img src="${esc(g.ImageURL)}" alt="${esc(g.Title)}" loading="lazy" onerror="this.closest('.gi').style.display='none'"></div>
+      <div class="m"><strong>${esc(g.Title)}</strong><span>${esc(g.Description || '')}</span></div>
+    </div>`).join('');
+}
+
+// Returning student
+function lookupStudent(phone) {
+  const hint = $('returningHint');
+  if (!phone || phone.length < 6) { hint.textContent = ''; hint.classList.remove('show'); return; }
+  google.script.run.withSuccessHandler(res => {
+    if (res && res.ok) {
+      const form = $('requestForm');
+      if (!form.studentName.value) form.studentName.value = res.student.StudentName;
+      if (!form.studentID.value)   form.studentID.value   = res.student.StudentID;
+      hint.textContent = `Welcome back, ${res.student.StudentName}! You have ${res.student.TotalRequests} previous request(s).`;
+      hint.classList.add('show');
+    } else { hint.textContent = ''; hint.classList.remove('show'); }
+  }).lookupStudent(phone);
+}
+
+// File input
+let FILE_DATA = null;
+$('fileInput').addEventListener('change', function (e) {
+  const file = e.target.files[0], prev = $('filePreview');
+  FILE_DATA = null;
+  if (!file) { prev.innerHTML = ''; return; }
+  if (file.size > 10 * 1024 * 1024) {
+    prev.innerHTML = '<div class="fp-item err">This file is over 10MB. Choose a smaller file.</div>';
+    e.target.value = ''; return;
+  }
+  const reader = new FileReader();
+  reader.onload = () => {
+    FILE_DATA = { name: file.name, mimeType: file.type || 'application/octet-stream', base64: reader.result.split(',')[1] };
+    prev.innerHTML = `<div class="fp-item"><span>📎 ${esc(file.name)}</span><span>${(file.size / 1024).toFixed(0)} KB</span></div>`;
+  };
+  reader.readAsDataURL(file);
+});
+
+// Submit
+$('requestForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const form = e.target, btn = $('submitBtn'), msg = $('formMsg');
+  if (!form.studentName.value.trim() || !form.phone.value.trim() || !form.serviceType.value) {
+    msg.textContent = 'Add your name, phone number and a service to continue.';
+    msg.className = 'msg err'; return;
+  }
+  btn.disabled = true; btn.textContent = 'Sending…'; msg.textContent = '';
+  const payload = {
+    studentName: form.studentName.value.trim(),
+    studentID:   form.studentID.value.trim(),
+    phone:       form.phone.value.trim(),
+    serviceType: form.serviceType.value,
+    details:     form.details.value.trim(),
+    file:        FILE_DATA
+  };
+  google.script.run
+    .withSuccessHandler(res => {
+      btn.disabled = false; btn.textContent = 'Send request';
+      if (res.ok) {
+        msg.innerHTML = `✅ Request sent. Your ID is <strong>${esc(res.requestId)}</strong>. We will contact you shortly.`;
+        msg.className = 'msg ok';
+        form.reset(); FILE_DATA = null;
+        $('filePreview').innerHTML = '';
+        $('returningHint').textContent = ''; $('returningHint').classList.remove('show');
+      } else {
+        msg.textContent = res.message || 'Your request did not go through. Please try again.';
+        msg.className = 'msg err';
+      }
+    })
+    .withFailureHandler(() => {
+      btn.disabled = false; btn.textContent = 'Send request';
+      msg.textContent = 'No connection. Check your network and send again.';
+      msg.className = 'msg err';
+    })
+    .submitRequest(payload);
+});
+
+// Status
+$('statusBtn').addEventListener('click', checkStatus);
+$('statusInput').addEventListener('keydown', e => { if (e.key === 'Enter') checkStatus(); });
+function checkStatus() {
+  const val = $('statusInput').value.trim(), out = $('statusResult');
+  if (!val) { out.innerHTML = '<div class="s-msg">Enter your phone number or student ID above.</div>'; return; }
+  out.innerHTML = '<div class="s-msg">Checking…</div>';
+  google.script.run.withSuccessHandler(res => {
+    if (!res.ok) { out.innerHTML = `<div class="s-msg">${esc(res.message)}</div>`; return; }
+    out.innerHTML = res.requests.map(r => `
+      <div class="s-item">
+        <div class="s-top"><strong>${esc(r.RequestID)}</strong><span class="badge ${badgeClass(r.Status)}">${esc(r.Status)}</span></div>
+        <div class="s-meta">${esc(r.ServiceType)} • ${new Date(r.Timestamp).toLocaleDateString()}</div>
+        ${r.AdminNotes ? `<div class="s-note">${esc(r.AdminNotes)}</div>` : ''}
+        ${r.CompletedFileURL ? `<a href="${esc(r.CompletedFileURL)}" target="_blank" rel="noopener" class="link">Download completed file</a>` : ''}
+      </div>`).join('');
+  }).withFailureHandler(() => { out.innerHTML = '<div class="s-msg">No connection. Please try again.</div>'; })
+    .checkRequestStatus(val);
+}
+
+// Site config
+(function () {
+  const wa = `https://wa.me/${SITE.phone}?text=${encodeURIComponent('Hello AOC Dynamic Concept, I want to make an enquiry.')}`;
+  ['waFloat', 'waHero', 'waLink'].forEach(id => $(id).href = wa);
+  $('contactPhone').textContent = SITE.phoneDisplay;
+  $('contactAddress').textContent = SITE.address;
+  $('directionsLink').href = `https://maps.google.com/?q=${encodeURIComponent(SITE.address)}`;
+  $('contactHours').textContent = SITE.hours;
+})();
+
+// Helpers
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+function badgeClass(status) {
+  const s = String(status).toLowerCase();
+  if (s === 'ready') return 'ok';
+  if (s === 'collected') return 'done';
+  if (s === 'in progress') return 'prog';
+  return 'pend';
+}
+function onErr(err) { console.error(err); }
+function iconFor(name) {
+  const n = String(name).toLowerCase();
+  if (n.includes('photo')) return '📄';
+  if (n.includes('print')) return '🖨️';
+  if (n.includes('bind') || n.includes('lamin')) return '📚';
+  if (n.includes('assign') || n.includes('typing')) return '⌨️';
+  if (n.includes('project')) return '🎓';
+  if (n.includes('clear')) return '✅';
+  if (n.includes('transcript')) return '📜';
+  if (n.includes('regist')) return '🌐';
+  if (n.includes('scan')) return '📠';
+  if (n.includes('cv') || n.includes('cover')) return '📝';
+  return '⚙️';
+}
+</script>
+</body>
+</html>
